@@ -1,9 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import taskService from "../services/taskService";
 
-const AllTasksScreen = () => {
-  const [tasks, setTasks] = useState([]);
-
+const AllTasks = (props) => {
   useEffect(() => {
     getTasks();
   }, []);
@@ -12,13 +10,13 @@ const AllTasksScreen = () => {
     let tasks = await taskService.getAll();
 
     tasks = tasks.filter((val) => val.title !== undefined);
-    setTasks(tasks);
+    props.setTasks(tasks);
   };
 
   return (
     <>
-      {tasks.length > 0 ? (
-        tasks.map((task) => (
+      {props.tasks.length > 0 ? (
+        props.tasks.map((task) => (
           <div key={task.id}>
             <h1>{task.title}</h1>
             <p>{task.body}</p>
@@ -31,4 +29,4 @@ const AllTasksScreen = () => {
   );
 };
 
-export default AllTasksScreen;
+export default AllTasks;

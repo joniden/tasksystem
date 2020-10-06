@@ -1,14 +1,15 @@
 import React from "react";
-import AddTaskScreen from "./screens/AddTaskScreen";
-import AllTasksScreen from "./screens/AllTasksScreen";
 import "./App.css";
+import { Box } from "@material-ui/core";
+import Header from "./components/Header";
+import TasksScreen from "./screens/TasksScreen";
 
 function App() {
   return (
-    <div className="App">
-      <AddTaskScreen />
-      <AllTasksScreen />
-    </div>
+    <Box>
+      <Header />
+      <TasksScreen />
+    </Box>
   );
 }
 

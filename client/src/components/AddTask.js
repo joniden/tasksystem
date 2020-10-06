@@ -2,21 +2,19 @@ import React, { useState } from "react";
 import { Button, TextField, FormGroup, Container } from "@material-ui/core";
 import taskService from "../services/taskService";
 
-const AddTaskScreen = () => {
-  const [task, setTaskValue] = useState({});
-
+const AddTask = (props) => {
   const handleOnChange = (event) => {
     const { name, value } = event.target;
 
     // Keep task but change just the name
-    const t = { ...task, [name]: value };
+    const t = { ...props.task, [name]: value };
 
-    setTaskValue(t);
+    props.setTaskValue(t);
   };
 
   const handleOnSubmit = (event) => {
     event.preventDefault();
-    taskService.addTask(task);
+    taskService.addTask(props.task);
   };
 
   return (
@@ -44,4 +42,4 @@ const AddTaskScreen = () => {
   );
 };
 
-export default AddTaskScreen;
+export default AddTask;
