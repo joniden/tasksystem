@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Button, TextField, FormGroup, Container } from "@material-ui/core";
+import taskService from "../services/taskService";
 
 const AddTaskScreen = () => {
   const [task, setTaskValue] = useState({});
@@ -14,17 +15,17 @@ const AddTaskScreen = () => {
   };
 
   const handleOnSubmit = (event) => {
-    console.log(event);
+    event.preventDefault();
+    taskService.addTask(task);
   };
 
   return (
     <Container maxWidth="sm">
-      <form>
+      <form onSubmit={handleOnSubmit}>
         <FormGroup>
           <TextField
             label="Task Title"
             name="title"
-            value={task.title}
             onChange={handleOnChange}
           />
 
@@ -32,10 +33,9 @@ const AddTaskScreen = () => {
             label="Body"
             name="body"
             onChange={handleOnChange}
-            value={task.body}
             multiline
           />
-          <Button variant="contained" color="primary" onSubmit={handleOnSubmit}>
+          <Button variant="contained" color="primary" type="submit">
             Submit
           </Button>
         </FormGroup>
