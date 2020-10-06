@@ -1,7 +1,8 @@
-const baseUrl = "http://localhost:5000";
+import axios from "axios";
 
-export const getAll = async () => {
-  let res = await fetch(`${baseUrl}/api/task`);
-  console.log(res);
-  return res || [];
+export default {
+  getAll: async () => {
+    let res = await axios.get(`/api/task`);
+    return res.data || [];
+  },
 };
