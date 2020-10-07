@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, TextField, FormGroup, Container } from "@material-ui/core";
+import { Button, TextField, Grid, Card, CardContent } from "@material-ui/core";
 import taskService from "../services/taskService";
 
 const AddTask = (props) => {
@@ -21,28 +21,49 @@ const AddTask = (props) => {
     result.then((val) => props.addTask(val.task));
   };
 
-  return (
-    <Container maxWidth="sm">
-      <form onSubmit={handleOnSubmit}>
-        <FormGroup>
-          <TextField
-            label="Task Title"
-            name="title"
-            onChange={handleOnChange}
-          />
+  const flexContainer = {
+    display: "flex",
+    flexDirection: "column",
+  };
 
-          <TextField
-            label="Body"
-            name="body"
-            onChange={handleOnChange}
-            multiline
-          />
-          <Button variant="contained" color="primary" type="submit">
-            Submit
-          </Button>
-        </FormGroup>
-      </form>
-    </Container>
+  return (
+    <Grid item>
+      <h1>Add task</h1>
+      <Card>
+        <CardContent>
+          <form onSubmit={handleOnSubmit} style={flexContainer}>
+            <Grid
+              container
+              direction="column"
+              justify="flex-start"
+              spacing={2}
+              alignItems="flex-start"
+            >
+              <Grid item>
+                <TextField
+                  label="Task Title"
+                  name="title"
+                  onChange={handleOnChange}
+                />
+              </Grid>
+              <Grid item>
+                <TextField
+                  label="Body"
+                  name="body"
+                  onChange={handleOnChange}
+                  multiline
+                />
+              </Grid>
+              <Grid item>
+                <Button variant="contained" color="primary" type="submit">
+                  Submit
+                </Button>
+              </Grid>
+            </Grid>
+          </form>
+        </CardContent>
+      </Card>
+    </Grid>
   );
 };
 

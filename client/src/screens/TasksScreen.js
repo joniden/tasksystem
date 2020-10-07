@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, TextField, FormGroup, Container } from "@material-ui/core";
+import { Container, Grid } from "@material-ui/core";
 import taskService from "../services/taskService";
 import AddTask from "../components/AddTask";
 import AllTasks from "../components/AllTasks";
@@ -9,7 +9,7 @@ const TasksScreen = () => {
 
   const getTasks = async () => {
     let tasks = await taskService.getAll();
-    tasks = tasks.filter((val) => val.title !== undefined);
+    tasks = tasks.filter((val) => val.title !== undefined).reverse();
     setTasks(tasks);
   };
 
@@ -21,11 +21,22 @@ const TasksScreen = () => {
     getTasks();
   }, []);
 
+  const containerStyle = {
+    marginTop: "5px",
+  };
+
   return (
-    <>
+    <Grid
+      container
+      direction="row"
+      justify="center"
+      spacing={10}
+      alignItems="flex-start"
+      style={containerStyle}
+    >
       <AddTask addTask={addTask} />
-      <AllTasks tasks={tasks} />{" "}
-    </>
+      <AllTasks tasks={tasks} />
+    </Grid>
   );
 };
 
