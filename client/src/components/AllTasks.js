@@ -1,18 +1,6 @@
-import React, { useEffect } from "react";
-import taskService from "../services/taskService";
+import React from "react";
 
 const AllTasks = (props) => {
-  useEffect(() => {
-    getTasks();
-  }, []);
-
-  const getTasks = async () => {
-    let tasks = await taskService.getAll();
-
-    tasks = tasks.filter((val) => val.title !== undefined);
-    props.setTasks(tasks);
-  };
-
   return (
     <>
       {props.tasks.length > 0 ? (

@@ -3,18 +3,22 @@ import { Button, TextField, FormGroup, Container } from "@material-ui/core";
 import taskService from "../services/taskService";
 
 const AddTask = (props) => {
+  const [task, setTaskValue] = useState({});
+
   const handleOnChange = (event) => {
     const { name, value } = event.target;
 
     // Keep task but change just the name
-    const t = { ...props.task, [name]: value };
+    const t = { ...task, [name]: value };
 
-    props.setTaskValue(t);
+    setTaskValue(t);
   };
 
   const handleOnSubmit = (event) => {
     event.preventDefault();
-    taskService.addTask(props.task);
+
+    let result = taskService.addTask(task);
+    result.then((val) => props.addTask(val.task));
   };
 
   return (

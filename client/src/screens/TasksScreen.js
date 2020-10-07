@@ -6,14 +6,25 @@ import AllTasks from "../components/AllTasks";
 
 const TasksScreen = () => {
   const [tasks, setTasks] = useState([]);
-  const [task, setTaskValue] = useState({});
 
-  useEffect(() => {});
+  const getTasks = async () => {
+    let tasks = await taskService.getAll();
+    tasks = tasks.filter((val) => val.title !== undefined);
+    setTasks(tasks);
+  };
+
+  const addTask = (task) => {
+    getTasks();
+  };
+
+  useEffect(() => {
+    getTasks();
+  }, []);
 
   return (
     <>
-      <AddTask setTaskValue={setTaskValue} />
-      <AllTasks tasks={tasks} setTasks={setTasks} />{" "}
+      <AddTask addTask={addTask} />
+      <AllTasks tasks={tasks} />{" "}
     </>
   );
 };
