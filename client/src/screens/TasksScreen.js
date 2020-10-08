@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Container, Grid } from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 import taskService from "../services/taskService";
 import AddTask from "../components/AddTask";
 import AllTasks from "../components/AllTasks";

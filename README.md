@@ -25,3 +25,19 @@ brew services start mongodb-community@4.4
 // Stop
 brew services stop mongodb-community@4.4
 ```
+
+# Run
+
+## Server
+
+`cd /server/`
+`npm run server`
+
+## Client
+
+`cd /client`
+`npm start`
+
+# Mongo
+
+literally anywhere just write `mongo` in your terminal
