@@ -1,9 +1,32 @@
 import React, { useState } from "react";
-import { Button, TextField, Grid, Card, CardContent } from "@material-ui/core";
+import {
+  Button,
+  TextField,
+  Grid,
+  Card,
+  CardContent,
+  makeStyles,
+  Container,
+} from "@material-ui/core";
+import { Alert } from "@material-ui/lab";
 import taskService from "../services/taskService";
+
+const useStyles = makeStyles((theme) => ({
+  form: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "flex-start",
+  },
+  formItem: {
+    marginBottom: 20,
+  },
+}));
 
 const AddTask = (props) => {
   const [task, setTaskValue] = useState({});
+  const [taskAdded, setTaskAdded] = useState(false);
+
+  const classes = useStyles();
 
   const handleOnChange = (event) => {
     const { name, value } = event.target;
@@ -18,52 +41,56 @@ const AddTask = (props) => {
     event.preventDefault();
 
     let result = taskService.addTask(task);
-    result.then((val) => props.addTask(val.task));
-  };
-
-  const flexContainer = {
-    display: "flex",
-    flexDirection: "column",
+    result.then((val) => {
+      setTaskAdded(true);
+      // Hide it again after 3 seconds
+      setTimeout(() => setTaskAdded(false), 3000);
+    });
   };
 
   return (
-    <Grid item>
+    <Container maxWidth="sm">
       <h1>Add task</h1>
       <Card>
         <CardContent>
-          <form onSubmit={handleOnSubmit} style={flexContainer}>
-            <Grid
-              container
-              direction="column"
-              justify="flex-start"
-              spacing={2}
-              alignItems="flex-start"
+          <form onSubmit={handleOnSubmit} className={classes.form}>
+            {taskAdded && (
+              <Alert variant="filled" severity="success">
+                Task added
+              </Alert>
+            )}
+            <TextField
+              label="Task Title"
+              name="title"
+              onChange={handleOnChange}
+              className={classes.formItem}
+            />
+            <TextField
+              label="Body"
+              name="body"
+              onChange={handleOnChange}
+              multiline
+              className={classes.formItem}
+            />
+            <TextField
+              label="Requirements"
+              name="body"
+              onChange={handleOnChange}
+              multiline
+              className={classes.formItem}
+            />
+            <Button
+              variant="contained"
+              color="primary"
+              type="submit"
+              className={classes.formItem}
             >
-              <Grid item>
-                <TextField
-                  label="Task Title"
-                  name="title"
-                  onChange={handleOnChange}
-                />
-              </Grid>
-              <Grid item>
-                <TextField
-                  label="Body"
-                  name="body"
-                  onChange={handleOnChange}
-                  multiline
-                />
-              </Grid>
-              <Grid item>
-                <Button variant="contained" color="primary" type="submit">
-                  Submit
-                </Button>
-              </Grid>
-            </Grid>
+              Submit
+            </Button>
           </form>
         </CardContent>
       </Card>
-    </Grid>
+    </Container>
   );
 };
 

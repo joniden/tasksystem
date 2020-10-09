@@ -26,6 +26,14 @@ module.exports = (app) => {
     });
   });
 
+  app.delete(`/api/task/`, async (req, res) => {
+    let task = await Task.deleteMany();
+
+    return res.status(202).send({
+      error: false,
+    });
+  });
+
   app.delete(`/api/task/:id`, async (req, res) => {
     const { id } = req.params;
 
