@@ -18,6 +18,10 @@ const TasksScreen = () => {
     setTasks(tasks);
   };
 
+  const handleSelectTask = (task) => {
+    selectTask(task);
+  };
+
   useEffect(() => {
     getTasks();
   }, []);
@@ -30,15 +34,14 @@ const TasksScreen = () => {
     <Grid
       container
       direction="row"
-      justify="center"
-      spacing={10}
       alignItems="flex-start"
+      justify="center"
       style={containerStyle}
     >
-      <AllTasks tasks={tasks} />
+      <AllTasks handleSelectTask={handleSelectTask} tasks={tasks} />
       <Switch>
         <Route path={`${match.path}/:id`}>
-          <SingleTask task={task} />
+          <SingleTask />
         </Route>
         <Route path={match.path}>
           <h3>Please select a ticket.</h3>

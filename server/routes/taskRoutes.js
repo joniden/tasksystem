@@ -7,6 +7,12 @@ module.exports = (app) => {
     return res.status(200).send(tasks);
   });
 
+  app.get(`/api/task/:id`, async (req, res) => {
+    const { id } = req.params;
+    let tasks = await Task.findById(id);
+    return res.status(200).send(tasks);
+  });
+
   app.post(`/api/task`, async (req, res) => {
     let task = await Task.create(req.body);
     return res.status(201).send({
