@@ -10,7 +10,7 @@ export default {
     return res.data;
   },
   getTask: async (id) => {
-    let res = await axios.get("/api/task/:id", id);
+    let res = await axios.get(`/api/task/${id}`);
     return res.data;
   },
 };

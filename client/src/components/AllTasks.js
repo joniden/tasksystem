@@ -23,10 +23,6 @@ const useStyles = makeStyles((theme) => ({
 const AllTasks = (props) => {
   const classes = useStyles();
 
-  const handleSelectTask = (event) => {
-    event.preventDefault();
-  };
-
   return (
     <Grid item className={classes.list}>
       <h1>All tasks</h1>
@@ -35,7 +31,6 @@ const AllTasks = (props) => {
           <ButtonBase
             key={task._id.toString()}
             href={`/${task._id}`}
-            //onClick={handleSelectTask}
             className={classes.button}
           >
             <Paper className={classes.paper}>

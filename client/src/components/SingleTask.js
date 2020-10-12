@@ -1,6 +1,7 @@
 import { Grid, makeStyles } from "@material-ui/core";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import taskService from "../services/taskService";
+import { useParams } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -9,10 +10,15 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const SingleTask = (props) => {
-  const { task } = props;
+const SingleTask = () => {
 
-  useEffect(() => {});
+  const [task, setTask] = useState({})
+  let { id } = useParams();
+
+  useEffect(() => {
+   
+    taskService.getTask(id).then(t => setTask(t))
+  }, []);
 
   const classes = useStyles();
 
