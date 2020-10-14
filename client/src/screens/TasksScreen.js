@@ -1,21 +1,27 @@
 import React, { useEffect, useState } from "react";
 import taskService from "../services/taskService";
-import AddTask from "../components/AddTask";
 import AllTasks from "../components/AllTasks";
 import SingleTask from "../components/SingleTask";
 import { useRouteMatch, Switch, Route } from "react-router-dom";
 import { makeStyles } from "@material-ui/core";
 
-const useStyles = () => makeStyles({
+const useStyles = makeStyles(() => ({
   container: {
     display: "flex",
-    flexFlow: "row"
+    flexDirection: "row",
+    justifyContent: "flex-start",
+    margin: "20px",
+    position: "relative",
+    height: "100%"
+  }, 
+  single: {
+ 
   }
-})
+}))
 
 const TasksScreen = () => {
   const [tasks, setTasks] = useState([]);
-  const [task, selectTask] = useState({});
+  const classes = useStyles();
 
   let match = useRouteMatch();
 
@@ -25,22 +31,14 @@ const TasksScreen = () => {
     setTasks(tasks);
   };
 
-  const handleSelectTask = (task) => {
-    selectTask(task);
-  };
-
   useEffect(() => {
     getTasks();
-    console.log(match.path)
   }, []);
 
-  const containerStyle = {
-    marginTop: "5px",
-  };
-
   return (
-    <div 
-      <AllTasks handleSelectTask={handleSelectTask} tasks={tasks} />
+    <div className={classes.container}>
+      <AllTasks tasks={tasks} />
+      <div className={classes.single}>
       <Switch>
         <Route path={`${match.path}:id`}>
           <SingleTask />
@@ -49,6 +47,8 @@ const TasksScreen = () => {
           <h3>Please select a ticket.</h3>
         </Route>
       </Switch>
+      </div>
+    </div>
   );
 };
 

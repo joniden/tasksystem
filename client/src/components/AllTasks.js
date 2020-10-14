@@ -1,16 +1,22 @@
-import { Box, Grid, Paper, makeStyles, ButtonBase } from "@material-ui/core";
+import { Box, Paper, makeStyles, ButtonBase } from "@material-ui/core";
 import React, { useEffect } from "react";
 
 const useStyles = makeStyles((theme) => ({
+  container: {
+    position: "relative",
+    width: "300px",
+    overflowY: "scroll",
+    bottom: "0"
+  },
+  listWrapper: {    
+    position: "absolute",    
+  },
   list: {
-    height: "70vh",
-    overflow: "scroll",
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "stretch",
+    listStyle: "none",
+    marginLeft: "-40px"
   },
   paper: {
-    maxWidth: 400,
+    width: 250,
     margin: `${theme.spacing(1)}px auto`,
     padding: theme.spacing(2),
     backgroundColor: "#f5f5f5",
@@ -24,10 +30,14 @@ const AllTasks = (props) => {
   const classes = useStyles();
 
   return (
-    <Grid item className={classes.list}>
+    <div className={classes.container}>
       <h1>All tasks</h1>
+      <div className={classes.listWrapper}>
+      <ul className={classes.list}>
       {props.tasks.length > 0 ? (
+        
         props.tasks.map((task, index) => (
+          <li>
           <ButtonBase
             key={task._id.toString()}
             href={`/${task._id}`}
@@ -38,11 +48,15 @@ const AllTasks = (props) => {
               <p>{task.body}</p>
             </Paper>
           </ButtonBase>
-        ))
-      ) : (
+          </li>
+        )
+        
+        )) : (
         <p>No tasks</p>
       )}
-    </Grid>
+      </ul>
+      </div>
+    </div>
   );
 };
 

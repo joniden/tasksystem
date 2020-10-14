@@ -8,7 +8,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 const App = () => {
   return (
-    <Box>
+    <>
       <Header />
       <Router>
         <Switch>
@@ -20,7 +20,7 @@ const App = () => {
           </Route>
         </Switch>
       </Router>
-    </Box>
+    </>
   );
 };
 
