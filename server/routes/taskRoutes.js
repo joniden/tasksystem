@@ -9,8 +9,12 @@ module.exports = (app) => {
 
   app.get(`/api/task/:id`, async (req, res) => {
     const { id } = req.params;
-    let tasks = await Task.findById(id);
-    return res.status(200).send(tasks);
+    try {
+      let task = await Task.findById(id);
+      return res.status(200).send(task);
+    } catch (error) {
+      return res.status(404).send({ error: true });
+    }
   });
 
   app.post(`/api/task`, async (req, res) => {

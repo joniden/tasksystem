@@ -11,6 +11,10 @@ export default {
   },
   getTask: async (id) => {
     let res = await axios.get(`/api/task/${id}`);
+    return res;
+  },
+  deleteTask: async (id) => {
+    let res = await axios.delete(`/api/task/${id}`);
     return res.data;
   },
 };

@@ -28,6 +28,8 @@ brew services stop mongodb-community@4.4
 
 # Run
 
+`npm start` will trigger both client and server or you can start individually
+
 ## Server
 
 `cd /server/`

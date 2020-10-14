@@ -20,14 +20,14 @@ const Header = () => {
     <AppBar position="static">
       <Toolbar>
         <Typography variant="h6" className={classes.title}>
-          Ticket System
+          Task System
         </Typography>
 
         <Button href="/add" color="inherit">
-          Add Ticket
+          Add Task
         </Button>
         <Button href="/" color="inherit">
-          All tickets
+          All Tasks
         </Button>
       </Toolbar>
     </AppBar>
