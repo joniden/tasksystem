@@ -65,7 +65,7 @@ const AddTaskScreen = (props) => {
               className={classes.formItem}
             />
             <TextField
-              label="Body"
+              label="Description"
               name="body"
               onChange={handleOnChange}
               multiline
@@ -73,7 +73,7 @@ const AddTaskScreen = (props) => {
             />
             <TextField
               label="Requirements"
-              name="body"
+              name="requirements"
               onChange={handleOnChange}
               multiline
               className={classes.formItem}
