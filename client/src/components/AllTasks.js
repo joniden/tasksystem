@@ -1,19 +1,19 @@
-import { Box, Paper, makeStyles, ButtonBase } from "@material-ui/core";
-import React, { useEffect } from "react";
+import { Paper, makeStyles, ButtonBase } from "@material-ui/core";
+import React from "react";
 
 const useStyles = makeStyles((theme) => ({
   container: {
     position: "relative",
     width: "300px",
     overflowY: "scroll",
-    bottom: "0"
+    bottom: "0",
   },
-  listWrapper: {    
-    position: "absolute",    
+  listWrapper: {
+    position: "absolute",
   },
   list: {
     listStyle: "none",
-    marginLeft: "-40px"
+    marginLeft: "-40px",
   },
   paper: {
     width: 250,
@@ -33,28 +33,26 @@ const AllTasks = (props) => {
     <div className={classes.container}>
       <h1>All tasks</h1>
       <div className={classes.listWrapper}>
-      <ul className={classes.list}>
-      {props.tasks.length > 0 ? (
-        
-        props.tasks.map((task, index) => (
-          <li>
-          <ButtonBase
-            key={task._id.toString()}
-            href={`/${task._id}`}
-            className={classes.button}
-          >
-            <Paper className={classes.paper}>
-              <h2>{task.title}</h2>
-              <p>{task.body}</p>
-            </Paper>
-          </ButtonBase>
-          </li>
-        )
-        
-        )) : (
-        <p>No tasks</p>
-      )}
-      </ul>
+        <ul className={classes.list}>
+          {props.tasks.length > 0 ? (
+            props.tasks.map((task, index) => (
+              <li key={index.toString()}>
+                <ButtonBase
+                  key={task._id.toString()}
+                  href={`/${task._id}`}
+                  className={classes.button}
+                >
+                  <Paper className={classes.paper}>
+                    <h2>{task.title}</h2>
+                    <p>{task.body}</p>
+                  </Paper>
+                </ButtonBase>
+              </li>
+            ))
+          ) : (
+            <p>No tasks</p>
+          )}
+        </ul>
       </div>
     </div>
   );

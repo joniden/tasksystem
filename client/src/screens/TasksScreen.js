@@ -12,12 +12,12 @@ const useStyles = makeStyles(() => ({
     justifyContent: "flex-start",
     margin: "20px",
     position: "relative",
-    height: "100%"
-  }, 
+    height: "100%",
+  },
   single: {
- 
-  }
-}))
+    height: "calc(100vh - 105px)",
+  },
+}));
 
 const TasksScreen = () => {
   const [tasks, setTasks] = useState([]);
@@ -39,14 +39,14 @@ const TasksScreen = () => {
     <div className={classes.container}>
       <AllTasks tasks={tasks} />
       <div className={classes.single}>
-      <Switch>
-        <Route path={`${match.path}:id`}>
-          <SingleTask />
-        </Route>
-        <Route path={match.path}>
-          <h3>Please select a ticket.</h3>
-        </Route>
-      </Switch>
+        <Switch>
+          <Route path={`${match.path}:id`}>
+            <SingleTask />
+          </Route>
+          <Route path={match.path}>
+            <h3>Please select a ticket.</h3>
+          </Route>
+        </Switch>
       </div>
     </div>
   );

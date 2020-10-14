@@ -1,6 +1,5 @@
 import React from "react";
 import "./App.css";
-import { Box } from "@material-ui/core";
 import Header from "./components/Header";
 import AddTaskScreen from "./screens/AddTaskScreen";
 import TasksScreen from "./screens/TasksScreen";

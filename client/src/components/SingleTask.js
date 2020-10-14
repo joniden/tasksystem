@@ -1,4 +1,4 @@
-import { Grid, makeStyles } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import taskService from "../services/taskService";
 import { useParams } from "react-router-dom";
@@ -6,22 +6,20 @@ import { useParams } from "react-router-dom";
 const useStyles = makeStyles(() => ({
   container: {
     display: "flex",
-    position:"relative",
+    position: "relative",
     flexDirection: "column",
-    height: "calc(100vh - 105px)",
-    overflowY: "scroll"
+    overflowY: "scroll",
+    marginLeft: "20px",
   },
 }));
 
 const SingleTask = () => {
-
-  const [task, setTask] = useState({})
+  const [task, setTask] = useState({});
   let { id } = useParams();
 
   useEffect(() => {
-   
-    taskService.getTask(id).then(t => setTask(t))
-  }, []);
+    taskService.getTask(id).then((t) => setTask(t));
+  }, [id]);
 
   const classes = useStyles();
 
