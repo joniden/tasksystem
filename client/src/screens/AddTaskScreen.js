@@ -9,6 +9,7 @@ import {
 } from "@material-ui/core";
 import { Alert } from "@material-ui/lab";
 import taskService from "../services/taskService";
+import AddCategories from "../components/AddCategories";
 
 const useStyles = makeStyles((theme) => ({
   form: {
@@ -86,6 +87,7 @@ const AddTaskScreen = (props) => {
             >
               Submit
             </Button>
+            <AddCategories />
           </form>
         </CardContent>
       </Card>
