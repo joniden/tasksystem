@@ -6,6 +6,4 @@ const schema = new Schema({
   name: String,
 });
 
-mongoose.model("category", schema);
-
-export default schema;
+mongoose.model("categories", schema);

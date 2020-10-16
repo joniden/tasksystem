@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
-const category = require("./models/Category");
+const category = require("./Category");
 
 const taskSchema = new Schema({
   id: Number,

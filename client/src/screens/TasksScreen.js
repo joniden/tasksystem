@@ -28,7 +28,7 @@ const TasksScreen = () => {
   let match = useRouteMatch();
 
   const getTasks = async () => {
-    let tasks = await taskService.getAll();
+    let tasks = await taskService.getAllTasks();
     tasks = tasks.filter((val) => val.title !== undefined).reverse();
     setTasks(tasks);
   };
