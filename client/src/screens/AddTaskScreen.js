@@ -9,7 +9,8 @@ import {
 } from "@material-ui/core";
 import { Alert } from "@material-ui/lab";
 import taskService from "../services/taskService";
-import AddCategories from "../components/AddCategories";
+import CreateCategories from "../components/CreateCategories";
+import AttachedCategories from "../components/AttachedCategories";
 
 const useStyles = makeStyles((theme) => ({
   form: {
@@ -20,11 +21,32 @@ const useStyles = makeStyles((theme) => ({
   formItem: {
     marginBottom: 20,
   },
+  addCategoryContainer: {
+    display: "flex",
+    alignItems: "stretch",
+    justifyContent: "flex-start",
+    flexFlow: "column",
+  },
+  textField: {
+    flexGrow: 2,
+    marginRight: "10px",
+  },
+  categoriesContainer: {
+    display: "flex",
+    alignContent: "space-evenly",
+    flexWrap: "wrap",
+    marginTop: "10px",
+    marginBottom: "10px",
+    "& > *": {
+      margin: theme.spacing(0.5),
+    },
+  },
 }));
 
 const AddTaskScreen = (props) => {
   const [task, setTaskValue] = useState({});
   const [taskAdded, setTaskAdded] = useState(false);
+  const [attachedCategories, setAttachedCategories] = useState([]);
 
   const classes = useStyles();
 
@@ -48,6 +70,31 @@ const AddTaskScreen = (props) => {
     });
   };
 
+  const addCategoryToTask = (category) => {
+    let newTask = task;
+    if (`categories` in task) {
+      newTask.categories.push(category);
+    } else {
+      newTask["categories"] = [category];
+    }
+    setTaskValue(newTask);
+  };
+
+  const handleSelectCategory = (selectedCategory) => {
+    if (!attachedCategories.some((category) => category === selectedCategory)) {
+      addCategoryToTask(selectedCategory);
+      setAttachedCategories((state) => [...state, selectedCategory]);
+    }
+  };
+
+  const handleRemoveCategory = (categoryToDelete) => () => {
+    let newCategories = attachedCategories.filter(
+      (category) => category._id !== categoryToDelete._id
+    );
+
+    setAttachedCategories(newCategories);
+  };
+
   return (
     <Container maxWidth="sm">
       <h1>Add task</h1>
@@ -62,6 +109,7 @@ const AddTaskScreen = (props) => {
             <TextField
               label="Task Title"
               name="title"
+              required
               onChange={handleOnChange}
               className={classes.formItem}
             />
@@ -69,6 +117,7 @@ const AddTaskScreen = (props) => {
               label="Description"
               name="body"
               onChange={handleOnChange}
+              rows={4}
               multiline
               className={classes.formItem}
             />
@@ -77,7 +126,13 @@ const AddTaskScreen = (props) => {
               name="requirements"
               onChange={handleOnChange}
               multiline
+              rows={4}
               className={classes.formItem}
+            />
+            <AttachedCategories
+              classes={classes}
+              categories={attachedCategories}
+              removeCategory={handleRemoveCategory}
             />
             <Button
               variant="contained"
@@ -85,10 +140,13 @@ const AddTaskScreen = (props) => {
               type="submit"
               className={classes.formItem}
             >
-              Submit
+              Create task
             </Button>
-            <AddCategories />
           </form>
+          <CreateCategories
+            classes={classes}
+            selectCategory={handleSelectCategory}
+          />
         </CardContent>
       </Card>
     </Container>

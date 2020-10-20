@@ -7,7 +7,7 @@ export default {
   },
   addTask: async (task) => {
     let res = await axios.post("/api/task", task);
-    return res.data;
+    return res;
   },
   getTask: async (id) => {
     let res = await axios.get(`/api/task/${id}`);
