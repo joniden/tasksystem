@@ -1,5 +1,6 @@
-import { Paper, makeStyles, ButtonBase } from "@material-ui/core";
+import { Paper, makeStyles, ButtonBase, Chip } from "@material-ui/core";
 import React from "react";
+import CategoriesContainer from "./CategoriesContainer";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -44,7 +45,20 @@ const AllTasks = (props) => {
                 >
                   <Paper className={classes.paper}>
                     <h2>{task.title}</h2>
-                    <p>{task.body}</p>
+                    {task.categories !== undefined && (
+                      <>
+                        <h2>Categories</h2>
+                        <CategoriesContainer>
+                          {task.categories.map((category) => (
+                            <Chip
+                              key={category.id}
+                              label={category.name}
+                              color="primary"
+                            />
+                          ))}
+                        </CategoriesContainer>
+                      </>
+                    )}
                   </Paper>
                 </ButtonBase>
               </li>

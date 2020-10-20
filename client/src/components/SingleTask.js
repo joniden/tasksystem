@@ -50,12 +50,20 @@ const SingleTask = (props) => {
           <p>{task.requirements}</p>
           <h2>Description</h2>
           <p>{task.body}</p>
-          <CategoriesContainer>
-            {task.categories !== undefined &&
-              task.categories.map((category) => (
-                <Chip key={category.id} label={category.name} color="primary" />
-              ))}
-          </CategoriesContainer>
+          {task.categories !== undefined && (
+            <>
+              <h2>Categories</h2>
+              <CategoriesContainer>
+                {task.categories.map((category) => (
+                  <Chip
+                    key={category.id}
+                    label={category.name}
+                    color="primary"
+                  />
+                ))}
+              </CategoriesContainer>
+            </>
+          )}
           <Button variant="contained" color="secondary" onClick={onDelete}>
             Delete
           </Button>
