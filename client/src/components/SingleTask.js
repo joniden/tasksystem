@@ -1,9 +1,10 @@
-import { Button, makeStyles } from "@material-ui/core";
+import { Button, makeStyles, Chip } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import taskService from "../services/taskService";
 import { Redirect, useParams } from "react-router-dom";
+import CategoriesContainer from "./CategoriesContainer";
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   container: {
     display: "flex",
     position: "relative",
@@ -49,7 +50,12 @@ const SingleTask = (props) => {
           <p>{task.requirements}</p>
           <h2>Description</h2>
           <p>{task.body}</p>
-
+          <CategoriesContainer>
+            {task.categories !== undefined &&
+              task.categories.map((category) => (
+                <Chip key={category.id} label={category.name} color="primary" />
+              ))}
+          </CategoriesContainer>
           <Button variant="contained" color="secondary" onClick={onDelete}>
             Delete
           </Button>

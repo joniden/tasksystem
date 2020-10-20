@@ -31,16 +31,6 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 2,
     marginRight: "10px",
   },
-  categoriesContainer: {
-    display: "flex",
-    alignContent: "space-evenly",
-    flexWrap: "wrap",
-    marginTop: "10px",
-    marginBottom: "10px",
-    "& > *": {
-      margin: theme.spacing(0.5),
-    },
-  },
 }));
 
 const AddTaskScreen = (props) => {
@@ -72,10 +62,13 @@ const AddTaskScreen = (props) => {
 
   const addCategoryToTask = (category) => {
     let newTask = task;
+
+    let obj = { id: category._id, name: category.name };
+
     if (`categories` in task) {
-      newTask.categories.push(category);
+      newTask.categories.push(obj);
     } else {
-      newTask["categories"] = [category];
+      newTask["categories"] = [obj];
     }
     setTaskValue(newTask);
   };

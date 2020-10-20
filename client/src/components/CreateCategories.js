@@ -1,6 +1,7 @@
 import { Button, Chip, TextField } from "@material-ui/core";
 import React, { useState, useEffect } from "react";
 import taskService from "../services/taskService";
+import CategoriesContainer from "./CategoriesContainer";
 
 const CreateCategories = (props) => {
   const [newCategoryText, setNewCategoryText] = useState("");
@@ -33,7 +34,7 @@ const CreateCategories = (props) => {
 
   return (
     <>
-      <div className={classes.categoriesContainer}>
+      <CategoriesContainer>
         {categories.map((category) => (
           <Chip
             key={`${category._id}`}
@@ -41,7 +42,7 @@ const CreateCategories = (props) => {
             label={category.name}
           />
         ))}
-      </div>
+      </CategoriesContainer>
       <div className={classes.addCategoryContainer}>
         <h2>Add Categories</h2>
         <TextField
