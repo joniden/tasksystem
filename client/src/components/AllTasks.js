@@ -1,6 +1,7 @@
 import { Paper, makeStyles, ButtonBase, Chip } from "@material-ui/core";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import CategoriesContainer from "./CategoriesContainer";
+import Filter from "./Filter";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -30,13 +31,33 @@ const useStyles = makeStyles((theme) => ({
 const AllTasks = (props) => {
   const classes = useStyles();
 
+  const [filters, setFilters] = useState([]);
+  const [tasks, setTasks] = useState([]);
+
+  useEffect(() => {
+    if (filters.length > 0) {
+      const tasks = props.tasks.filter((task) => {
+        return filters.some((filter) => {
+          return task.categories.some(
+            (category) => filter.name === category.name
+          );
+        });
+      });
+
+      setTasks(tasks);
+    } else {
+      setTasks(props.tasks);
+    }
+  }, [filters, props.tasks]);
+
   return (
     <div className={classes.container}>
       <h1>All tasks</h1>
+      <Filter setFilters={setFilters} />
       <div className={classes.listWrapper}>
         <ul className={classes.list}>
-          {props.tasks.length > 0 ? (
-            props.tasks.map((task, index) => (
+          {tasks.length > 0 ? (
+            tasks.map((task, index) => (
               <li key={index.toString()}>
                 <ButtonBase
                   key={task._id.toString()}
@@ -45,19 +66,16 @@ const AllTasks = (props) => {
                 >
                   <Paper className={classes.paper}>
                     <h2>{task.title}</h2>
-                    {task.categories !== undefined && (
-                      <>
-                        <h2>Categories</h2>
-                        <CategoriesContainer>
-                          {task.categories.map((category) => (
-                            <Chip
-                              key={category.id}
-                              label={category.name}
-                              color="primary"
-                            />
-                          ))}
-                        </CategoriesContainer>
-                      </>
+                    {task.categories.length > 0 && (
+                      <CategoriesContainer>
+                        {task.categories.map((category) => (
+                          <Chip
+                            key={category.id}
+                            label={category.name}
+                            color="primary"
+                          />
+                        ))}
+                      </CategoriesContainer>
                     )}
                   </Paper>
                 </ButtonBase>
