@@ -28,7 +28,7 @@ const Filter = (props) => {
         <TextField
           {...params}
           variant="outlined"
-          label="filterSelectedOptions"
+          label="Filter Categories"
           placeholder="Filter Categories"
         />
       )}

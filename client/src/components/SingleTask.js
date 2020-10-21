@@ -9,7 +9,6 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     position: "relative",
     flexDirection: "column",
-    overflowY: "scroll",
     marginLeft: "20px",
   },
 }));
@@ -44,7 +43,6 @@ const SingleTask = (props) => {
         <Redirect to="/" />
       ) : (
         <>
-          <h1>{task.id}</h1>
           <h1>{task.title}</h1>
           <h2>Requirements</h2>
           <p>{task.requirements}</p>

@@ -36,6 +36,7 @@ const AllTasks = (props) => {
 
   useEffect(() => {
     if (filters.length > 0) {
+      // Check tasks that contains categories
       const tasks = props.tasks.filter((task) => {
         return filters.some((filter) => {
           return task.categories.some(
